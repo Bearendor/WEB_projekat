@@ -1,0 +1,10 @@
+[
+{"podforum":"Serbian history","naslov":"Dragutin Matic - Hawkeye (picture)","datumKreiranja":"05.09.2017.","tip":"S","negativniGlasovi":[],"pozitivniGlasovi":["mile","pera"],"autor":"mile","sadrzaj":"https:\/\/kafenisanje.rs\/wp-content\/uploads\/2016\/10\/dragutin-matic-oko-sokolovo.jpg"}
+,
+{"podforum":"Serbian history","naslov":"Milunka Savic - a woman hero","datumKreiranja":"05.09.2017.","tip":"L","negativniGlasovi":["pera"],"pozitivniGlasovi":["mile"],"autor":"pera","sadrzaj":"https:\/\/s-media-cache-ak0.pinimg.com\/736x\/bc\/d8\/3d\/bcd83d3cf15248411f56ffaa31435f92--serbian-military-history.jpg"}
+,
+{"podforum":"Serbian history","naslov":"Serbian army's retreat through Albania","datumKreiranja":"05.09.2017.","tip":"T","negativniGlasovi":["pera","mile"],"pozitivniGlasovi":["admin"],"autor":"user","sadrzaj":"Following the October 1915 invasion of Serbia during World War I at the hands of German, Austro-Hungarian and Bulgarian armies, the Serbian army retreated through Albania, an event sometimes called the Albanian golgotha. During the long march, some 240,000 retreating Serbs died from the cold, starvation, disease and at the hands of Albanian tribesmen. The march through the Albanian mountains had decimated its rank and contributed to the horrendous losses the Serbs had suffered in the First World War \u2013 the highest per capita of any country."}
+,
+{"podforum":"Weather","naslov":"Climate Change","datumKreiranja":"20.09.2017.","tip":"T","negativniGlasovi":[],"pozitivniGlasovi":["pera"],"autor":"pera","sadrzaj":"Climate change is a change in the statistical distribution of weather patterns when that change lasts for an extended period of time (i.e., decades to millions of years)."}
+
+]

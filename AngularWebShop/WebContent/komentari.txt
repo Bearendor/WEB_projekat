@@ -1,0 +1,12 @@
+[
+{"podkomentari":["1","5"],"menjan":"N","roditeljskiKomentar":"","pripadaTemi":"Serbian army's retreat through Albania","datumKomentara":"10.09.2017.","id":0,"tekstKomentara":"That was a heroic feat...","negativniGlasovi":[],"pozitivniGlasovi":["pera"],"autor":"user"}
+,
+{"podkomentari":[],"menjan":"N","roditeljskiKomentar":"0","pripadaTemi":"Serbian army's retreat through Albania","datumKomentara":"11.09.2017.","id":1,"tekstKomentara":"It trully was!","negativniGlasovi":[],"pozitivniGlasovi":[],"autor":"pera"}
+,
+{"podkomentari":[],"menjan":"N","roditeljskiKomentar":"","pripadaTemi":"Serbian army's retreat through Albania","datumKomentara":"12.09.2017.","id":2,"tekstKomentara":"I bet I couldn't survite that...","negativniGlasovi":[],"pozitivniGlasovi":[],"autor":"mile"}
+,
+{"podkomentari":[],"menjan":"N","roditeljskiKomentar":"0","pripadaTemi":"Serbian army's retreat through Albania","datumKomentara":"17.09.2017.","id":5,"tekstKomentara":"yeah, it was!","negativniGlasovi":[],"pozitivniGlasovi":[],"autor":"admin"}
+,
+{"podkomentari":[],"menjan":"N","roditeljskiKomentar":"","pripadaTemi":"Climate Change","datumKomentara":"20.09.2017.","id":6,"tekstKomentara":"My first article!","negativniGlasovi":[],"pozitivniGlasovi":[],"autor":"pera"}
+
+]

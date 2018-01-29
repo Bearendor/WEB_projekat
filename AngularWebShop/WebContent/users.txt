@@ -1,0 +1,12 @@
+[
+{"firstName":"Marko","lastName":"Bera","password":"admin","role":"A","subscribedForums":[],"phone":"0641234567","postedTopics":[],"email":"beramarko@yahoo.com","postedComments":[],"username":"admin","registerDate":"26.08.2017."}
+,
+{"firstName":"Pera","lastName":"Peric","password":"modIstorija","role":"M","subscribedForums":[],"phone":"0607654321","postedTopics":[],"email":"moderator_istorije@forum.rs","postedComments":[],"username":"modIstorija","registerDate":"30.08.2017."}
+,
+{"firstName":"first","lastName":"last","password":"pass","role":"M","subscribedForums":[],"phone":"0631114567","postedTopics":[],"email":"sasa@gmail.com","postedComments":[],"username":"user","registerDate":"30.08.2017."}
+,
+{"firstName":"Pera","lastName":"Peric","password":"pera","role":"K","subscribedForums":[],"phone":"066123456","postedTopics":[],"email":"pera@gmail.com","postedComments":[],"username":"pera","registerDate":"02.09.2017."}
+,
+{"firstName":"Mile","lastName":"Miletic","password":"mile","role":"K","subscribedForums":[],"phone":"069333222","postedTopics":[],"email":"mile@hotmail.com","postedComments":[],"username":"mile","registerDate":"04.09.2017."}
+
+]

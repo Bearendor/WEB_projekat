@@ -1,0 +1,18 @@
+[
+{"posiljalac":"mile","naslov":"test","procitana":"Y","primalac":"pera","id":"0","sadrzaj":"test message"}
+,
+{"posiljalac":"mile","naslov":"Hang in there","procitana":"Y","primalac":"pera","id":"1","sadrzaj":"Hang in there, old chap!"}
+,
+{"posiljalac":"user","naslov":"Are you at home","procitana":"N","primalac":"pera","id":"2","sadrzaj":"Are you ready for blah, blah, blah, blah..."}
+,
+{"posiljalac":"admin","naslov":"Complaint review","procitana":"Y","primalac":"pera","id":"3","sadrzaj":"We reviewed your complaint, but must inform you that we see no reason to take further actions."}
+,
+{"posiljalac":"admin","naslov":"Complaint review","procitana":"N","primalac":"pera","id":"4","sadrzaj":"We reviewed your complaint and decided to delete that entity which we find offensive!"}
+,
+{"posiljalac":"admin","naslov":"Complaint about comment","procitana":"N","primalac":"admin","id":"5","sadrzaj":"There was a complaint about a comment you posted at theme 'Serbian army's retreat through Albania'. It had to be deleted because it violated the rules."}
+,
+{"posiljalac":"admin","naslov":"Complaint about comment","procitana":"N","primalac":"admin","id":"6","sadrzaj":"There was a complaint about a comment you posted at theme 'Serbian army's retreat through Albania'. It had to be deleted because it violated the rules."}
+,
+{"posiljalac":"admin","naslov":"Complaint review","procitana":"N","primalac":"pera","id":"7","sadrzaj":"We reviewed your complaint and decided to delete that entity which we find offensive!"}
+
+]

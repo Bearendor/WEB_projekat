@@ -1,0 +1,128 @@
+<div ng-controller="podforumiController">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th style="width:10%">Title</th>
+				<th style="width:20%">Description</th>
+				<th style="width:10%">Icon</th>
+				<th style="width:30%">List of rules</th>
+				<th style="width:10%">Responsible moderator</th>
+				<th style="width:10%">List of moderators</th>
+				<th style="width:10%"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="pf in podforumi track by $index">
+				<td>{{pf.naziv}}</td>
+				<td>{{pf.opis}}</td>
+				<td><img ng-src="{{pf.ikonica}}" width="96" height="96"></td>
+				<td>
+					<p ng-repeat="pravilo in pf.spisakPravila track by $index">
+						{{pravilo}} 
+					</p>
+				</td>
+				<td>{{pf.odgovorniModerator}}</td>
+				<td>
+					<p ng-repeat="mod in pf.spisakModeratora track by $index">
+						{{mod}} <br>
+					</p>
+				</td>
+				<td>
+					<button ng-click="obrisiPodforum(pf.naziv)" ng-if="$root.log.role == 'A'">Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br> <br> <input type="button" value="Add subforum"
+		ng-click="showHide()" /> <br> <br>
+
+	<div ng-hide="isHidden">
+		<form class="form-horizontal" id="dodavanjePodforuma"  method="post" ng-submit="dodajPodforum()">
+			<table>
+				<tr> 
+					<td style="width:50%">
+						<div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="email">Title:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="email"
+									placeholder="Enter subforum title..." ng-model="podforum.naziv" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">Description:</label>
+							<div class="col-sm-10">
+								<textarea form="dodavanjePodforuma" rows="7" cols="50" placeholder="Enter subforum description..." 
+								ng-model="podforum.opis" required>						
+								</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="profile_pic">Icon:</label>
+							<div class="col-sm-10">
+								<input type="url" id="profile_pic" name="profile_pic"
+						           placeholder="Enter picture's URL from WEB " ng-model="podforum.ikonica">
+							</div>
+						</div>
+						</div>
+					</td>
+					<td style="width:50%">
+						<div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">List of rules:</label>
+							<div class="col-sm-10">
+								<textarea form="dodavanjePodforuma" rows="5" cols="55" placeholder="Enter list of rules..." 
+								ng-model="podforum.spisakPravila"  ng-list="/\n/" required>						
+								</textarea>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd"></label>
+							<div class="col-sm-10">
+								<input type="hidden" ng-model="podforum.odgovorniModerator">
+							</div>
+						</div>
+			
+						<div class="form-group">
+							<div class="col-sm-10">
+							<table>
+								<tr>
+									<td style="width:35%">
+										<label class="control-label col-sm-2" for="pwd">List of moderators:</label>
+									</td>
+									<td style="width:65%">
+										<p ng-repeat="usr in users" ng-if="usr.role == 'M'">
+											<input 
+												type="checkbox"
+												name="selektovaniModeratori[]"  
+												value="{{usr.username>>"
+												ng-checked="podforum.spisakModeratora.indexOf(usr.username) > -1"
+												ng-click="toggleSelection(usr.username)"
+												> {{usr.username}}
+										</p>
+									</td>
+								</tr>
+							</table>
+							</div>
+							
+						</div>
+						
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10"><button>Add</button>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+	</div>
+
+</div>

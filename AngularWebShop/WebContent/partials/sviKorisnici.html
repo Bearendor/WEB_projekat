@@ -1,0 +1,28 @@
+<div ng-controller="changeUserController">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th> Username </th>
+				<th> Email address </th>
+				<th> Firstname </th>
+				<th> Lastname </th>
+				<th> Phone </th>
+				<th> Role </th>
+				<th> </th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="usr in users" ng-if="usr.role != 'A'"> 
+				<td> {{usr.username}} </td>
+				<td> {{usr.email}} </td>
+				<td> {{usr.firstName}} </td>
+				<td> {{usr.lastName}} </td>
+				<td> {{usr.phone}} </td>
+				<td> {{usr.role}} </td>
+				<td> 
+					<button ng-click="promeniUlogu(usr)">Change role</button> 
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

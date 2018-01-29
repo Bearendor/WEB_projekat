@@ -1,0 +1,148 @@
+<div ng-controller="themeController">
+	<div id="subforumDetails">
+		<p>
+		<h3>{{$root.izabraniPodforum.naziv}}</h3>
+		<br> <b>Responsible Moderator:</b> <i>{{$root.izabraniPodforum.odgovorniModerator}}</i>
+		<br> <br> <b>List of Rules:</b> <br>
+		<p ng-repeat=" rule in $root.izabraniPodforum.spisakPravila">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>{{rule}}</i>
+		</p>
+		<b>Description:</b> <br> <i>{{$root.izabraniPodforum.opis}}</i>
+		</p>
+	</div>
+	<div ng-controller="complaintsController">
+		&nbsp;&nbsp;&nbsp;
+		<button ng-if="$root.log.role == 'K'" type="button"
+			class="btn btn-warning" data-toggle="modal" data-target="#reportModal">Report
+			Subforum</button>
+		<br>
+		<div ng-if="$root.log">
+		&nbsp;&nbsp;&nbsp; 
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newTheme" ng-click="prepareTheme()">Create Theme</button>
+		</div>
+		<hr>
+	</div>
+
+	<div>
+		<ul class="nav nav-pills nav-stacked">
+			<li ng-repeat="t in themes" ng-if="t.podforum == $root.naslov"><a
+				href="#/tema" ng-click="sendTheme(t)" class="stackedLink">{{t.naslov}}</a></li>
+		</ul>
+
+	</div>
+	<button type=button" id="initThemes" ng-click="doInit()"></button>
+	
+
+	<div class="modal fade" id="reportModal" role="dialog"
+		ng-controller="complaintsController">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">File Report</h4>
+				</div>
+				<form class="form-horizontal" id="fileComplaint" method="post"
+					ng-submit="reportSubforum($root.izabraniPodforum)">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">Text:</label>
+							<div class="col-sm-10">
+								<textarea form="fileComplaint" rows="7" cols="50"
+									ng-model="complaint.tekstZalbe" autofocus>
+							</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button>Send Complaint</button>
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="newTheme" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Create New Theme</h4>
+				</div>
+				<form class="form-horizontal" id="fileComplaint" method="post"
+					ng-submit="createTheme()">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">Title: </label>
+							<div class="col-sm-10">
+								<input type="text" ng-model="theme.naslov" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">Type: </label>
+							<div class="col-sm-10">
+								<select name="singleSelect" ng-model="theme.tip">
+							        <option value="T">Text</option>
+							        <option value="L">Link</option>
+							        <option value="S">Image</option>
+							    </select><br>
+							</div>
+						</div>
+						<div ng-if="theme.tip == 'T'">
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="pwd">Text:</label>
+								<div class="col-sm-10">
+									<textarea form="fileComplaint" rows="7" cols="50"
+										ng-model="theme.sadrzaj" autofocus required>
+									</textarea>
+								</div>
+							</div>
+						</div>
+						<div ng-if="theme.tip == 'L'">
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="pwd">Link:</label>
+								<div class="col-sm-10">
+									<input type="url" placeholder="Enter URL here... " ng-model="theme.sadrzaj">
+								</div>
+							</div>
+						<div ng-if="theme.tip == 'S'">
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="pwd">Image Link from WEB:</label>
+								<div class="col-sm-10">
+									<input type="url" placeholder="Enter URL here... " ng-model="theme.sadrzaj">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">Text:</label>
+							<div class="col-sm-10">
+								<textarea form="fileComplaint" rows="7" cols="50"
+									ng-model="complaint.tekstZalbe">
+							</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button>Create Theme</button>
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>

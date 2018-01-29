@@ -1,0 +1,43 @@
+<div>
+	<ul class="nav nav-tabs nav-justified">
+		<li><a ng-click="showInfo()">Profile Informations</a></li>
+		<li><a ng-click="showMessages()">Messages</a></li>
+	</ul>
+
+	<div>
+		<div ng-show="userInfo">
+			<div id="userInformations">
+				<h3>Profile informations</h3>
+				<br>
+				<p>
+					<h5> <b><i>General info</i></b> </h5> <br>
+					Joined on: {{$root.log.registerDate}} <br>
+					Username: {{$root.log.username}}
+				</p>
+				<br>
+				<p>
+					<h5> <b><i>Personal info</i></b> </h5> <br>
+					Firstname: {{$root.log.firstName}} <br>
+					Lastname: {{$root.log.lastName}}
+				</p>
+				<br>
+				<p>
+					<h5> <b><i>Contact info</i></b> </h5> <br>
+					Email address: {{$root.log.email}} <br>
+					Phone number: {{$root.log.phone}}
+				</p>
+			</div>
+		</div>
+		<div ng-show="userMessages" ng-controller="messagesController" >
+			<div ng-include="'partials/poruke.html'">
+			</div>
+		</div>
+		<div id="menu2" class="tab-pane fade">
+			<h3>Menu 2</h3>
+			<p>Some content in menu 2.</p>
+		</div>
+	</div>
+	
+	
+
+</div>

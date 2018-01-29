@@ -1,0 +1,196 @@
+<div ng-controller="messagesController">
+	<div class="container">
+		<ul class="nav nav-tabs nav-justified">
+			<li>
+				<button type="button" id="composeMessage" class="btn" data-toggle="modal" data-target="#newMessage" 
+				ng-click="clearMsg()">Compose New Message</button>
+			</li>
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown">Inbox <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					
+					<li><a ng-click="showUnreadMessages()">Unread messages</a></li>
+					<li><a ng-click="showReadMessages()">Read messages</a></li>
+				</ul></li>
+			<li><a ng-click="showSentMessages()">Sent messages</a></li>
+		</ul>
+	</div>
+	
+	<div>
+		<div ng-show="unread">
+			
+			<table class="table table-condensed">
+				<tr ng-repeat="msg in messages track by $index" ng-if="msg.primalac == $root.log.username && msg.procitana == 'N'">
+					<td>{{msg.posiljalac}}</td>
+					<td>
+						<button type="button" class="btn btn-link" ng-click="showMessage(msg)"> {{msg.naslov}}</button>
+					</td>
+				</tr>					
+			</table>
+			<div id="messageInformations" ng-show="messageInfo">
+				<button type="button" id="closeMsgButton" class="btn btn-default btn-sm" ng-click="closeMsgInfo()"> Close <span class="glyphicon glyphicon-remove"></span>
+		        </button>			
+		        <p id="messageFrom"> <i><b>From:  </b></i> {{message.posiljalac}} </p>		        
+		        <br>
+		        <p id="messageSubject"><i><b> Subject: </b></i> {{message.naslov}} </p>
+		        <p id="messageContent">
+		        	{{message.sadrzaj}}
+		        </p>
+		        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#replyMessage" ng-click="openModal(message.posiljalac, message.primalac)">Reply</button>
+		        
+		        
+	        </div>
+		</div>
+
+		<div ng-show="read">
+			<table class="table table-condensed">
+				<tr ng-repeat="msg in messages track by $index" ng-if="msg.primalac == $root.log.username && msg.procitana == 'Y'">
+					<td>{{msg.posiljalac}}</td>
+					<td>
+						<button type="button" class="btn btn-link" ng-click="showMessage(msg)"> {{msg.naslov}}</button>
+					</td>
+				</tr>					
+			</table>
+			<div id="messageInformations" ng-show="messageInfo">
+				<button type="button" id="closeMsgButton" class="btn btn-default btn-sm" ng-click="closeMsgInfo()"> Close <span class="glyphicon glyphicon-remove"></span>
+		        </button>			
+		        <p id="messageFrom"> <i><b>From:  </b></i> {{message.posiljalac}} </p>		        
+		        <br>
+		        <p id="messageSubject"><i><b> Subject: </b></i> {{message.naslov}} </p>
+		        <p id="messageContent">
+		        	{{message.sadrzaj}}
+		        </p>
+		        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#replyMessage" ng-click="openModal(message.posiljalac, message.primalac)">Reply</button>	        
+	        </div>
+		</div>
+		<div ng-show="sent">
+			<table class="table table-condensed">
+				<tr ng-repeat="msg in messages track by $index" ng-if="msg.posiljalac == $root.log.username">
+					<td>{{msg.posiljalac}}</td>
+					<td>
+						<button type="button" class="btn btn-link" ng-click="showMessage(msg)"> {{msg.naslov}}</button>
+					</td>
+				</tr>					
+			</table>
+			<div id="messageInformations" ng-show="messageInfo">
+				<button type="button" id="closeMsgButton" class="btn btn-default btn-sm" ng-click="closeMsgInfo()"> Close <span class="glyphicon glyphicon-remove"></span>
+		        </button>			
+		        <p id="messageFrom"> <i><b>From:  </b></i> {{message.posiljalac}} </p>		        
+		        <br>
+		        <p id="messageSubject"><i><b> Subject: </b></i> {{message.naslov}} </p>
+		        <p id="messageContent">
+		        	{{message.sadrzaj}}
+		        </p>
+		    </div>
+		</div>
+	</div>
+	<button id="fireInit" ng-click="doInit()"></button>
+	
+	
+	<div class="modal fade" id="replyMessage" role="dialog"
+		ng-controller="commentController">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Reply to Message</h4>
+				</div>
+				<form class="form-horizontal" id="messageReply" method="post"
+					ng-submit="replyMsg()">
+					<div class="form-group">
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">Subject: </label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="message.naslov">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">Text:</label>
+						<div class="col-sm-10">
+							<textarea form="messageReply" rows="5" cols="55"
+								placeholder="Enter text here..."
+								ng-model="message.sadrzaj" required>						
+							</textarea>
+						</div>
+					</div>
+					<input type="hidden" ng-model="message.posiljalac">
+					<input type="hidden" ng-model="message.primalac">
+					<input type="hidden" ng-model="message.procitana">
+					<input type="hidden" ng-model="message.ID">
+						
+					<div class="modal-footer">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button>Reply</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	
+	
+	
+	
+	<div class="modal fade" id="newMessage" role="dialog"
+		ng-controller="commentController">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Compose Message</h4>
+				</div>
+				<form class="form-horizontal" id="messageReply" method="post"
+					ng-submit="replyMsg()">
+					<div class="form-group">
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">Send to: </label>
+						<div class="col-sm-10">
+							<select name="repeatSelect" id="repeatSelect" ng-model="message.primalac">
+						        <option ng-repeat="usr in users" ng-if="usr.username != $root.log.username" value="{{usr.username}}">{{usr.username}}</option>
+						    </select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">Subject: </label>
+						<div class="col-sm-10">
+							<input type="text" ng-model="message.naslov">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">Text:</label>
+						<div class="col-sm-10">
+							<textarea form="messageReply" rows="5" cols="55"
+								placeholder="Enter text here..."
+								ng-model="message.sadrzaj" required>						
+							</textarea>
+						</div>
+					</div>
+					<input type="hidden" ng-model="message.posiljalac">
+					<input type="hidden" ng-model="message.procitana">
+					<input type="hidden" ng-model="message.ID">
+						
+					<div class="modal-footer">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button>Send Message</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	
+	
+</div>
+

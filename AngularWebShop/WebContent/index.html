@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="webShop">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+<link href="css/index.css" rel="stylesheet" />
+<link href="css/tema.css" rel="stylesheet" />
+<link href="css/poruke.css" rel="stylesheet" />
+<link href="css/userProfile.css" rel="stylesheet" />
+<link href="css/zalba.css" rel="stylesheet" />
+<link href="css/podforum.css" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="js/angular.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/toast.js"></script>
+<script src="js/ui-bootstrap-tpls.js"></script>
+<script src="app/app.js"></script>
+<script src="app/controllers/loginCtrl.js"></script>
+<script src="app/controllers/changeUserCtrl.js"></script>
+<script src="app/controllers/registrationCtrl.js"></script>
+<script src="app/controllers/podforumiCtrl.js"></script>
+<script src="app/controllers/themeCtrl.js"></script>
+<script src="app/controllers/commentCtrl.js"></script>
+<script src="app/controllers/messagesCtrl.js"></script>
+<script src="app/controllers/complaintsCtrl.js"></script>
+<script src="app/services/complaintsService.js"></script>
+<script src="app/services/messagesService.js"></script>
+<script src="app/services/commentService.js"></script>
+<script src="app/services/themeService.js"></script>
+<script src="app/services/podforumService.js"></script>
+<script src="app/services/userService.js"></script>
+</head>
+
+<body ng-controller="loginController as log">
+	<nav class="navbar navbar-inverse">
+		<div>
+			<ul class="nav navbar-nav navbar">
+				<li><a ng-click="doEnable()" href="#/registration"><span
+						class="glyphicon glyphicon-save"></span> Register</a></li>
+				<li ng-if="!$root.log"><a href="#/"><span class="glyphicon glyphicon-log-in"></span>
+						Login</a></li>
+				<li ng-if="$root.log"><a ng-href="#/" ng-click="log.odjavljivanje()">Logout</a> </li>
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-right" id="profil">
+				<li ng-if="$root.log"><a ng-click="doEnable()" ng-href="#/{{$root.route}}" >
+						<span class="glyphicon glyphicon-user"></span>Profile</a></li>
+			</ul>
+		</div>
+		
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" ng-click="doDisable()" href="#/mainPage" id="forumatorHome"><h2>F o r u m a t o r</h2></a>
+			</div>
+		</div>
+		<br>
+	</nav>
+	
+	
+	<div ng-hide="$root.enabled != 'N'">
+		<div ng-controller="podforumiController as pfc">
+			<div class="container" ng-controller="themeController as tc">
+				<ul class="nav nav-tabs">
+					<li ng-repeat="pf in podforumi track by $index">
+						<a href="#podforum" data-toggle="tab" ng-click="sendTitle(pf.naziv)">
+							<img ng-src="{{pf.ikonica}}" width="36" height="36">
+							{{pf.naziv}}					
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div ng-view></div>
+
+
+
+
+</body>
+</html>

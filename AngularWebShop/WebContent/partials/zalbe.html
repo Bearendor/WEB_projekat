@@ -1,0 +1,39 @@
+
+<div ng-controller="complaintsController">	
+	<table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Sender</th>
+        <th>Date</th>
+        <th>Text</th>
+        <th>Entity type</th>
+        <th>Entity ID</th>
+        <th>Subforum</th>
+        <th>Action</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="z in complaints" >
+        <td>{{z.podnosilacZalbe}}</td>
+        <td>{{z.datumZalbe}}</td>
+        <td>
+        	<textarea cols="30" rows="5" id="tekstZalbe" readonly>
+        		{{z.tekstZalbe}}
+        	</textarea>
+        </td>
+        <td>{{z.entitetZalbe}}</td>
+        <td>{{z.idEntiteta}}</td>
+        <td>{{z.zalPodforum}}</td>
+        <td>
+        	<select name="repeatSelect" id="repeatSelect" ng-model="chosenAction" ng-change="choseOne(chosenAction)">
+        		<option ng-repeat="opt in actions" value="{{opt}}">{{opt}} </option>
+        	</select>
+        </td>
+        <td> 
+        	<button ng-click="initAction(z)">Execute</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

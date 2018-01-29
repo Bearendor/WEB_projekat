@@ -1,0 +1,32 @@
+#closeMsgButton {
+	color: red;
+	float:right;
+	margin-right: 2px;
+}
+
+#messageInformations {
+	border: 2px solid gray;
+	min-height: 100px;
+	margin-left: 1cm;
+	margin-right: 1cm;
+}
+#messageFrom {
+	margin-top: 1cm;
+	margin-left: 2cm;
+	margin-right: 2cm;
+}
+#messageSubject {
+	margin-left: 2cm;
+	margin-right: 2cm;
+}
+#messageContent {
+	border-style: inset;
+	margin-left: 2cm;
+	margin-right: 2cm;
+}
+#fireInit {
+	display: none;
+}
+#composeMessage {
+	margin-left: 2cm;
+}

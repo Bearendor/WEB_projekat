@@ -1,0 +1,283 @@
+<div ng-controller="themeController">
+
+	<div class="tipTekst" >
+		<button ng-if="$root.log.role == 'K' && $root.log.username != theme.autor" type="button" class="btn btn-warning"
+							id="editComment" data-toggle="modal" data-target="#reportTheme">Report Theme</button>
+		<h3>{{theme.naslov}}</h3>
+		<h6>Author: {{theme.autor}} &nbsp; &nbsp; Posted:
+			{{theme.datumKreiranja}}</h6>
+		<br>
+		<div ng-if="theme.tip == 'T'">
+			<textarea id="sadrzajTekst" readonly>
+				{{theme.sadrzaj}}
+			</textarea>
+		</div>
+		<div ng-if="theme.tip == 'L'">
+			<a ng-href="{{theme.sadrzaj}}" target="_blank">{{theme.naslov}}</a>
+		</div>
+		<div ng-if="theme.tip == 'S'">
+			<img ng-src="{{theme.sadrzaj}}">
+		</div>
+		<div>
+			<button type="button" class="btn btn-default btn-sm"
+				ng-click="pozUp()">
+				<span class="glyphicon glyphicon-plus"></span>
+				<p id="plusVote">{{theme.pozitivniGlasovi.length}}</p>
+			</button>
+			<button type="button" class="btn btn-default btn-sm"
+				ng-click="negUp()">
+				<span class="glyphicon glyphicon-minus"></span>
+				<p id="minusVote">{{theme.negativniGlasovi.length}}</p>
+			</button>
+		</div>
+		<br> <br>
+		<div ng-controller="commentController">
+			<button id="MyButtonTest" ng-click="doInit()"></button>
+			<div ng-repeat="com in comments" ng-if="theme.naslov == com.pripadaTemi">
+				<div id="commentText" ng-if="!com.roditeljskiKomentar">
+					<p id="pocetakKomentara">
+						<b>{{com.autor}}</b> &nbsp; &nbsp; <i>{{com.datumKomentara}}</i> &nbsp; &nbsp; <em ng-if="com.menjan == 'Y'"> Edited</em>
+						<em ng-if="com.menjan == 'N'">Not Edited</em>
+						<button ng-if="$root.log.role == 'A' || $root.log.username == com.autor" type="button" class="btn btn-danger"
+							id="editComment" ng-click="deleteComment(com)">Delete</button>
+						<button ng-if="$root.log.username == com.autor" type="button" class="btn btn-basic"
+							id="editComment" data-toggle="modal" data-target="#myModal" ng-click="setCommentId(com.id)">Edit</button>
+						<button ng-if="$root.log.role == 'K' && $root.log.username != com.autor" type="button" class="btn btn-warning"
+							id="editComment" data-toggle="modal" data-target="#reportModal" ng-click="readyForComplaint(com)">Report</button>
+					</p>
+					&nbsp;&nbsp;{{com.tekstKomentara}}
+					<div>
+						<a type="button" id="ngpod" ng-click="negUp(com)">
+							<span class="glyphicon glyphicon-minus"></span>
+							{{com.negativniGlasovi.length}}
+						</a>
+						<a type="button" id="pgpod" ng-click="pozUp(com)">
+							<span class="glyphicon glyphicon-plus"></span>
+							{{com.pozitivniGlasovi.length}}
+						</a>
+						
+					</div>
+					
+					<div ng-repeat="c in comments" ng-if="theme.naslov == c.pripadaTemi">
+						<div ng-repeat="pod in com.podkomentari" ng-if="pod == c.id"
+							id="podkomentar">
+							<hr>
+							<p>
+								<b>{{c.autor}}</b> &nbsp; &nbsp; <i>{{c.datumKomentara}}</i> &nbsp; &nbsp; <em ng-if="com.menjan == 'Y'"> Edited</em>
+								<em ng-if="com.menjan == 'N'">Not Edited</em>
+								<button ng-if="$root.log.role == 'A' || $root.log.username == com.autor" type="button" class="btn btn-danger"
+								id="editComment"  ng-click="deleteComment(c)">Delete</button>
+								<button ng-if="$root.log.username == c.autor" type="button" class="btn btn-basic"
+								id="editComment" data-toggle="modal" data-target="#myModal" ng-click="setCommentId(c.id)">Edit</button>
+								<button ng-if="$root.log.role == 'K' && $root.log.username != com.autor" type="button" class="btn btn-warning"
+								id="editComment" data-toggle="modal" data-target="#reportModal" ng-click="readyForComplaint(c)">Report</button>
+							</p>
+							{{c.tekstKomentara}}
+							<div>
+								<a type="button" id="ngpod" ng-click="negUp(c)">
+									<span class="glyphicon glyphicon-minus"></span>
+									{{c.negativniGlasovi.length}}
+								</a>
+								<a type="button" id="pgpod" ng-click="pozUp(c)">
+									<span class="glyphicon glyphicon-plus"></span>
+									{{c.pozitivniGlasovi.length}}
+								</a>
+								
+							</div>
+						</div>
+					</div>
+					<button type="button" data-toggle="modal" data-target="#replyModal"
+						ng-if="$root.log" class="btn btn-link" ng-click="transferParent(com)"> <<< Reply to comment</button>
+					
+				</div>
+				
+			</div>
+			<button ng-click="showHideNewComment()" ng-if="$root.log">Comment</button>
+			<div ng-show="showIt">
+				<form class="form-horizontal" id="dodavanjeKomentara" method="post"
+					ng-submit="addComment(theme.naslov)">
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">Text::</label>
+						<div class="col-sm-10">
+							<textarea form="dodavanjeKomentara" rows="5" cols="55"
+								placeholder="Enter text here..."
+								ng-model="comment.tekstKomentara" required>						
+							</textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd"></label>
+						<div class="col-sm-10">
+							<input type="hidden" ng-model="comment.pripadaTemi">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button>Add comment</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div></div>
+
+	<div>
+	<div class="modal fade" id="myModal" role="dialog"
+		ng-controller="commentController">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Edit Comment</h4>
+				</div>
+				<form class="form-horizontal" id="editCommentForm" method="post" ng-submit="edit()">
+				<div class="modal-body">						
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">Text:</label>
+						<div class="col-sm-10">
+							<textarea form="editCommentForm" rows="7" cols="50"
+								ng-model="comment.tekstKomentara" autofocus>
+							</textarea>
+						</div>
+					</div>	
+				</div>
+				<div class="modal-footer">
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10"><button>Edit</button>
+						</div>
+						
+					</div>
+				</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	</div>
+	
+	<div>
+	<div class="modal fade" id="replyModal" role="dialog"
+		ng-controller="commentController">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Reply to Comment</h4>
+				</div>
+				<form class="form-horizontal" id="dodavanjePodkomentara" method="post"
+					ng-submit="reply()">
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd">Text:</label>
+						<div class="col-sm-10">
+							<textarea form="dodavanjePodkomentara" rows="5" cols="55"
+								placeholder="Enter text here..."
+								ng-model="childComment.tekstKomentara" required>						
+							</textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="pwd"></label>
+						<div class="col-sm-10">
+							<input type="hidden" ng-model="childComment.pripadaTemi">
+						</div>
+					</div>
+					
+						
+				<div class="modal-footer">
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button>Add comment</button>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	</div>
+	
+	<div>
+	<div class="modal fade" id="reportModal" role="dialog"
+		ng-controller="complaintsController">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">File Report</h4>
+				</div>
+				<form class="form-horizontal" id="fileComplaint" method="post"
+					ng-submit="reportComment($root.izabraniKomentar)">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">Text:</label>
+							<div class="col-sm-10">
+								<textarea form="fileComplaint" rows="7" cols="50"
+									ng-model="complaint.tekstZalbe" autofocus>
+							</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button>Send Complaint</button>
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	</div>
+	
+	<div>
+	<div class="modal fade" id="reportTheme" role="dialog"
+		ng-controller="complaintsController">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">File Report</h4>
+				</div>
+				<form class="form-horizontal" id="fileComplaint" method="post"
+					ng-submit="reportTheme(theme)">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="pwd">Text:</label>
+							<div class="col-sm-10">
+								<textarea form="fileComplaint" rows="7" cols="50"
+									ng-model="complaint.tekstZalbe" autofocus>
+							</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button>Send Complaint</button>
+							</div>
+
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+	</div>
+	
+</div>
+

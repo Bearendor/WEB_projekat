@@ -1,0 +1,50 @@
+#sadrzajTekst {
+	width: 660px;
+	height: 350px;
+	resize: none;
+}
+
+.tipTekst {
+	margin-left: 3cm;
+	margin-right: 3cm;
+}
+
+#plusVote {
+	color: green;
+	text-align:right;
+}
+#minusVote {
+	color: red;
+	text-align:right;
+}
+#commentText {
+	border: 2px solid gray;
+    border-radius: 8px;
+}
+#podkomentar {
+	margin-left: 100px;
+	
+}
+#ngpod {
+	margin-right: 1cm;
+	color: red;
+	float:right;
+}
+#pgpod {
+	
+	color: green;
+	float:right;
+}
+#pocetakKomentara {
+	margin-left: 30px;
+}
+
+#editComment {
+	margin-right: 1cm;
+	float:right;
+}
+#MyButtonTest {
+	display: none;
+
+
+
